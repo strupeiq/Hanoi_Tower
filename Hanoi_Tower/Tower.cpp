@@ -22,8 +22,8 @@ std::vector<int> second_pillar(0);
 std::vector<int> third_pillar(0);
 
 /*
-Первый диск из (x0-r0 - left; y0 - w - top) в точку (x0 + r0 - right; y0 - bottom)
-Второй диск из (x0-r1; y0 – w * 2) в точку (x0+r1; y0 – w)
+РџРµСЂРІС‹Р№ РґРёСЃРє РёР· (x0-r0 - left; y0 - w - top) РІ С‚РѕС‡РєСѓ (x0 + r0 - right; y0 - bottom)
+Р’С‚РѕСЂРѕР№ РґРёСЃРє РёР· (x0-r1; y0 вЂ“ w * 2) РІ С‚РѕС‡РєСѓ (x0+r1; y0 вЂ“ w)
 x_0 - r[i] - left
 y_0 - h * (i + 1) - top
 x_0 + r[i] - right
