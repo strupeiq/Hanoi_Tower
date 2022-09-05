@@ -15,25 +15,15 @@ int main() {
     std::vector<int> first_pillar(5);
     std::vector<int> second_pillar(0);
     std::vector<int> third_pillar(0);
-    r_push();
     vector_push();
+
+   
 
     while (true) {
         setbkcolor(BLACK);
         clearviewport();
 
-        setfillstyle(SOLID_FILL, BROWN);
-        bar(180, 300, 220, 900);
-        bar(570, 300, 610, 900);                   //Отрисовка столбиков
-        bar(960, 300, 1000, 900);
-
-        draw_disks_1();
-        draw_disks_2();
-        draw_disks_3();
-
-        if (mousebuttons() == 1) {
-            game();
-        }
+        game();
 
         swapbuffers();
         delay(10);
