@@ -2,7 +2,6 @@
 #define _TOWER_H
 
 void vector_push();
-void r_push();
 void draw_disks_1();
 void draw_disks_2();
 void draw_disks_3();
