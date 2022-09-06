@@ -1,5 +1,6 @@
-#include "graphics.h"
+#include "headers/graphics.h"
 #include <vector>
+#include <iostream>
 
 #include "Tower.h"
 
@@ -82,13 +83,17 @@ void draw_disks_3() {
 int select_disk_1() {
     int x = mousex();
     int y = mousey();
+    
+    int topRadius = first_pillar[first_pillar.size() - 1];
+    
 
-    if (x >= x_0_1 - first_pillar[first_pillar.size() - 1] && x <= x_0_1 + first_pillar[first_pillar.size() - 1]
-        && y >= y_0 - h * (first_pillar.size() - 1) && y <= y_0 - h * first_pillar.size()) {
-
+    if (x >= x_0_1 - topRadius && x <= x_0_1 + topRadius
+        && y <= y_0 - h * (first_pillar.size() - 1) && y >= y_0 - h * first_pillar.size()) {
+        std::cout << "Selected\n";
         return 1;
     }
     else {
+        std::cout << "Not selected\n";
         return 0;
     }
 }
@@ -134,27 +139,34 @@ void game() {
 
     //Проверка 
     if (selectionFrom) {
-        if (select_disk_1()) {
+        if (mousebuttons() == 1 && select_disk_1()) {
+            std::cout << "Select disk 1\n";
             setfillstyle(SOLID_FILL, RED);
             bar(x_0_1 - first_pillar[first_pillar.size() - 1], y_0 - h * first_pillar.size(), x_0_1 + first_pillar[first_pillar.size() - 1], y_0 - h * (first_pillar.size() - 1));
             from = 1;
+            selectionFrom = false;
+            selectionTo = true;
         }
         else if (select_disk_2()) {
+            std::cout << "Select disk 2\n";
             setfillstyle(SOLID_FILL, RED);
             bar(x_0_2 - second_pillar[second_pillar.size() - 1], y_0 - h * second_pillar.size(), x_0_2 - second_pillar[second_pillar.size() - 1], y_0 - h * (second_pillar.size() - 1));
             from = 2;
+            selectionFrom = false;
+            selectionTo = true;
         }
         else if (select_disk_3()) {
+            std::cout << "Select disk 3\n";
             setfillstyle(SOLID_FILL, RED);
             bar(x_0_3 - third_pillar[third_pillar.size() - 1], y_0 - h * third_pillar.size(), x_0_3 - third_pillar[third_pillar.size() - 1], y_0 - h * (third_pillar.size() - 1));
             from = 3;
+            selectionFrom = false;
+            selectionTo = true;
         }
-        selectionFrom = false;
-        selectionTo = true;
     }
 
     else if (selectionTo) {
-
+        std::cout << "selectionto\n";
         if (from == 1) {
             if (select_disk_2()) {
                 if (first_pillar[first_pillar.size() - 1] < second_pillar[second_pillar.size() - 1]) {
@@ -205,8 +217,9 @@ void game() {
                 }
             }
         }
-
+        /*
         selectionTo = false;
         selectionFrom = true;
+        */
     }
 }
