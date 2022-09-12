@@ -17,7 +17,7 @@ int main() {
     std::vector<int> third_pillar(0);
     vector_push();
 
-   
+
 
     while (true) {
         setbkcolor(BLACK);
@@ -27,7 +27,6 @@ int main() {
 
         swapbuffers();
         delay(10);
-
 
         if (kbhit()) {
             int key = getch();
