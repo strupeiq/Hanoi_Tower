@@ -8,6 +8,9 @@ void draw_disks_3();
 int select_disk_1();
 int select_disk_2();
 int select_disk_3();
+int empty_2();
 void game();
+void game_over();
+
 
 #endif
