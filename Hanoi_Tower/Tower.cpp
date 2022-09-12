@@ -61,16 +61,20 @@ void vector_push() {
 
 
 void draw_disks_1() {
-    for (int i = 0; i < first_pillar.size(); ++i) {
-        if (i == 0) {
-            setfillstyle(SOLID_FILL, BROWN);
-            bar(x_0_1 - first_pillar[0], y_0 - h, x_0_1 + first_pillar[0], y_0);
-        }
-        else {
-            setfillstyle(SOLID_FILL, RGB(59, 153, 105));
-            bar(x_0_1 - first_pillar[i], y_0 - h * (i + 1), x_0_1 + first_pillar[i], y_0 - h * i);
-        }
+for (int i = 0; i < first_pillar.size(); ++i) {
+    if (i == 0) {
+        setfillstyle(SOLID_FILL, BROWN);
+        bar(x_0_1 - first_pillar[0], y_0 - h, x_0_1 + first_pillar[0], y_0);
     }
+    else if (from == 1 && i == first_pillar.size() - 1) {
+        setfillstyle(SOLID_FILL, RED);
+        bar(x_0_1 - first_pillar[i], y_0 - h * (i + 1), x_0_1 + first_pillar[i], y_0 - h * i);
+    }
+    else {
+        setfillstyle(SOLID_FILL, RGB(59, 153, 105));
+        bar(x_0_1 - first_pillar[i], y_0 - h * (i + 1), x_0_1 + first_pillar[i], y_0 - h * i);
+    }
+}
 }
 
 void draw_disks_2() {
@@ -78,6 +82,10 @@ void draw_disks_2() {
         if (i == 0) {
             setfillstyle(SOLID_FILL, BROWN);
             bar(x_0_2 - second_pillar[0], y_0 - h, x_0_2 + second_pillar[0], y_0);
+        }
+        else if (from == 2 && i == second_pillar.size() - 1) {
+            setfillstyle(SOLID_FILL, RED);
+            bar(x_0_2 - second_pillar[i], y_0 - h * (i + 1), x_0_2 + second_pillar[i], y_0 - h * i);
         }
         else {
             setfillstyle(SOLID_FILL, RGB(59, 153, 105));
@@ -92,6 +100,10 @@ void draw_disks_3() {
             setfillstyle(SOLID_FILL, BROWN);
             bar(x_0_3 - third_pillar[0], y_0 - h, x_0_3 + third_pillar[0], y_0);
         }
+        else if (from == 3 && i == third_pillar.size() - 1) {
+            setfillstyle(SOLID_FILL, RED);
+            bar(x_0_3 - third_pillar[i], y_0 - h * (i + 1), x_0_3 + third_pillar[i], y_0 - h * i);
+        }
         else {
             setfillstyle(SOLID_FILL, RGB(59, 153, 105));
             bar(x_0_3 - third_pillar[i], y_0 - h * (i + 1), x_0_3 + third_pillar[i], y_0 - h * i);
@@ -104,7 +116,6 @@ int select_disk_1() {
     int y = mousey();
 
     int topRadius = first_pillar[first_pillar.size() - 1];
-
 
     if (x >= x_0_1 - topRadius && x <= x_0_1 + topRadius
         && y <= y_0 - h * (first_pillar.size() - 1) && y >= y_0 - h * first_pillar.size()) {
@@ -149,6 +160,14 @@ int select_disk_3() {
     }
 }
 
+void game_over() {
+    std::string over = "Game over!";
+    if(second_pillar.size() == 5 || third_pillar.size() == 5){
+        setcolor(GREEN);
+        outtextxy(WIDTH - 600, HEIGHT - 450, "Game over!");
+}
+}
+
 void game() {
 
     setfillstyle(SOLID_FILL, BROWN);
@@ -188,7 +207,7 @@ void game() {
         }
     }
 
-    else if (selectionTo) {
+    else if (mousebuttons() == 1 && selectionTo) {
         std::cout << "selectionto\n";
         if (from == 1) {
             if (select_disk_2()) {
@@ -197,6 +216,7 @@ void game() {
                     first_pillar.pop_back();
                     selectionTo = false;
                     selectionFrom = true;
+                    from = 0;
                 }
             }
             else if (select_disk_3()) {
@@ -206,6 +226,7 @@ void game() {
                 }
                 selectionTo = false;
                 selectionFrom = true;
+                from = 0;
             }
         }
 
@@ -217,6 +238,7 @@ void game() {
                 }
                 selectionTo = false;
                 selectionFrom = true;
+                from = 0;
             }
             else if (select_disk_3()) {
                 if (second_pillar[second_pillar.size() - 1] < third_pillar[third_pillar.size() - 1]) {
@@ -225,6 +247,7 @@ void game() {
                 }
                 selectionTo = false;
                 selectionFrom = true;
+                from = 0;
             }
         }
 
@@ -235,6 +258,7 @@ void game() {
                     third_pillar.pop_back();
                     selectionTo = false;
                     selectionFrom = true;
+                    from = 0;
                 }
             }
             else if (select_disk_2()) {
@@ -243,12 +267,10 @@ void game() {
                     third_pillar.pop_back();
                     selectionTo = false;
                     selectionFrom = true;
+                    from = 0;
                 }
             }
         }
-        /*
-        selectionTo = false;
-        selectionFrom = true;
-        */
     }
+    game_over();
 }
